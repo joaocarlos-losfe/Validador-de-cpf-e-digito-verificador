@@ -8,6 +8,10 @@ def validate_cpf(cpf: str) -> bool:
     
     digits_numbers = [ int(digit) for digit in cpf if digit.isdigit() ]
 
+    #verify if 11 digits                     #verify if all numbers is equals
+    if (len(digits_numbers) != 11) or (len (set(digits_numbers)) == 1):
+        return False
+ 
     #verify first digit
     sum_of_digits = sum( a*b  for a,b in zip( digits_numbers[0:9], range(10, 1, -1) ) )
     expected = ( (sum_of_digits * 10) % 11 ) % 10
@@ -23,7 +27,7 @@ def validate_cpf(cpf: str) -> bool:
     return True
 
 if __name__=="__main__":
-    CPF = "033.000.000-00"
+    CPF = "333.333.333-33"
 
     if not validate_cpf(CPF):
         print("cpf invalido")
